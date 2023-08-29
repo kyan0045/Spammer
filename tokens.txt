@@ -1,0 +1,2 @@
+Token1 spamChannelId1
+Token2 spamChannelId2
