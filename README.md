@@ -23,7 +23,7 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
 
 
 
-<img src="https://poketwo.net/_next/image?url=%2Fassets%2Flogo.png&w=256&q=75" alt="poketwo logo" align="right" height="120px"><h2>About</h2>
+<h2>About</h2>
 A compact and easy configurable Discord-spammer selfbot with multi-token support.
 
 <h2 align="left">Features</h2>
