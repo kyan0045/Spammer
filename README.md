@@ -47,12 +47,12 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
   3. Run the following commands in your shell/console:</br>
 
   ```bash
-  git clone https://github.com/kyan0045/catchtwo.git
+  git clone https://github.com/kyan0045/spammer.git
   ```
   Note: You can also download the files using other methods.
 
   ```bash
-  cd catchtwo
+  cd spammer
   ```
 
   ```bash
