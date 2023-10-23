@@ -1,5 +1,5 @@
-var version = "1.0.0";
-// Version 1.0.0
+var version = "1.0.1";
+// Version 1.0.1
 // EVERYTHING can be set up in config.json, no need to change anything here :)!
 
 const { Client, Permissions } = require("discord.js-selfbot-v13");
@@ -68,20 +68,22 @@ if (!data) throw new Error(`Unable to find your tokens.`);
 const tokensAndChannelIds = data.split(/\s+/);
 config.tokens = [];
 
-if (tokensAndChannelIds.length % 2 !== 0) {
+/* if (tokensAndChannelIds.length % 2 !== 0) {
   if (!process.env.TOKENS)
     throw new Error(
       `Invalid number of tokens and guild IDs, please check if ./tokens.txt has an empty line, and if so, remove it.`
     );
   throw new Error(`Invalid number of tokens and guild IDs.`);
-}
+} */
 
 for (let i = 0; i < tokensAndChannelIds.length; i += 2) {
+  if (tokensAndChannelIds[i + 1]) {
   const token = tokensAndChannelIds[i].trim();
   const channelId = tokensAndChannelIds[i + 1].trim();
 
   if (token && channelId) {
     config.tokens.push({ token, channelId });
+    }
   }
 }
 
