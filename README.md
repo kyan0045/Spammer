@@ -14,7 +14,7 @@
 
 A compact and easy configurable Discord-spammer selfbot with multi-token support.</br>
 [![Support Server](https://img.shields.io/badge/Support_Server-000?style=for-the-badge&logo=&color=informational)](https://discord.gg/tXa2Hw5jHy)
-![Version](https://img.shields.io/badge/Version-1.0.0-000?style=for-the-badge&logo=&color=informational)
+![Version](https://img.shields.io/badge/Version-1.1.0-000?style=for-the-badge&logo=&color=informational)
 [![Stargazers](https://img.shields.io/github/stars/kyan0045/Spammer?style=for-the-badge&logo=&color=blue)](https://github.com/kyan0045/Spammer/stargazers)
 [![Forks](https://img.shields.io/github/forks/kyan0045/Spammer?style=for-the-badge&logo=&color=blue)](https://github.com/kyan0045/Spammer/network/members)
 [![Issues](https://img.shields.io/github/issues/kyan0045/Spammer?style=for-the-badge&logo=&color=informational)](https://github.com/kyan0045/Spammer/issues)
@@ -38,6 +38,9 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
 | Name  | Type | Default Value | Description |
 | ------------- | ------------- | ------------- | ------------- |
 | ```logWebhook```  | ```String``` | ```undefined```  | Tells the program which webhook to log to. |
+| ```spamSpeed```  | ```Number``` | ```1500```  | Tells the program how many milliseconds to wait between messages |
+| ```debug```  | ```String``` | ```false```  | Tells the program whether or not you want errors/bugs to log in the console |
+
 
 
 ## Installation
