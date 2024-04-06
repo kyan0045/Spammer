@@ -19,7 +19,7 @@ if (config?.logWebhook?.length > 25) {
 let data = process.env.TOKENS || fs.readFileSync("./tokens.txt", "utf-8");
 if (!data) throw new Error(`Unable to find your tokens.`);
 const tokensAndChannelIds = data.split(/\s+/);
-let config.tokens = [];
+config.tokens = [];
 for (let i = 0; i < tokensAndChannelIds.length; i += 2) {
   if (tokensAndChannelIds[i + 1]) {
     const token = tokensAndChannelIds[i].trim();
