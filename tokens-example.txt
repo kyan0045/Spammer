@@ -1,2 +1,0 @@
-Token1 ChannelID1 
-Token2 ChannelID2

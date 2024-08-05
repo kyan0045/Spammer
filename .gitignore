@@ -1,5 +1,4 @@
 package-lock.json
 node_modules
-tokens.txt
+tokens.json
 config.json
-data

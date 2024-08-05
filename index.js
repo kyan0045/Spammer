@@ -11,21 +11,21 @@ if (config?.logWebhook?.length > 25) {
   log = new WebhookClient({ url: config.logWebhook });
 }
 
-let data = process.env.TOKENS || fs.readFileSync("./tokens.txt", "utf-8");
-if (!data) throw new Error(`Unable to find your tokens.`);
-const tokensAndChannelIds = data.split(/\s+/);
-config.tokens = [];
-
-for (let i = 0; i < tokensAndChannelIds.length; i += 2) {
-  if (tokensAndChannelIds[i + 1]) {
-    const token = tokensAndChannelIds[i].trim();
-    const channelId = tokensAndChannelIds[i + 1].trim();
-
-    if (token && channelId) {
-      config.tokens.push({ token, channelId });
-    }
-  }
+let data;
+if (process.env.TOKENS) {
+  data = JSON.parse(process.env.TOKENS);
+} else {
+  data = fs.readJsonSync("./tokens.json"); 
 }
+
+if (!data || !Array.isArray(data)) {
+  throw new Error(`Unable to find valid tokens.`);
+}
+
+config.tokens = data.map(item => ({
+  token: item.token.trim(),
+  channelId: item.channelId.trim()
+}));
 
 if (process.env.REPLIT_DB_URL && (!process.env.TOKENS || !process.env.CONFIG))
   console.log(
@@ -43,7 +43,7 @@ async function Login(token, channelId) {
   if (!channelId) {
     console.log(
       chalk.redBright(
-        "You must specify a (valid) channel  ID for all your tokens. This is the channel in which they will spam."
+        "You must specify a (valid) channel ID for all your tokens. This is the channel in which they will spam."
       )
     );
   }
@@ -83,10 +83,12 @@ async function Login(token, channelId) {
     setInterval(async () => {
       const message = messages[Math.floor(Math.random() * messages.length)];
       const sentMessage = await spamChannel.send(message);
-      
+
       // Check if delete is set to true in config
       if (config.delete) {
-        sentMessage.delete().catch(err => console.log(chalk.red("Failed to delete message:", err)));
+        setTimeout(() => {
+          sentMessage.delete().catch(err => console.log(chalk.red("Failed to delete message:", err)));
+        }, 100); // Adjust the timeout if needed
       }
     }, config.spamSpeed);
   });
@@ -96,8 +98,8 @@ async function start() {
   for (var i = 0; i < config.tokens.length; i++) {
     await Login(config.tokens[i].token, config.tokens[i].channelId);
   }
-  if (log)
-    embed = {
+  if (log) {
+    const embed = {
       title: `Started!`,
       url: "https://github.com/XenDevs/Spammer",
       description: `Found ${config.tokens.length} tokens!`,
@@ -108,11 +110,12 @@ async function start() {
         icon_url: "https://avatars.githubusercontent.com/u/84374752?v=4",
       },
     };
-  log.send({
-    username: "Spammer Logs",
-    avatarURL: "https://avatars.githubusercontent.com/u/84374752?v=4",
-    embeds: [embed],
-  });
+    log.send({
+      username: "Spammer Logs",
+      avatarURL: "https://avatars.githubusercontent.com/u/84374752?v=4",
+      embeds: [embed],
+    });
+  }
 }
 
 process.on("unhandledRejection", (reason, p) => {
