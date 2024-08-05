@@ -1,5 +1,6 @@
 {
     "logWebhook": "",
     "spamSpeed": 1500,
-    "debug": false
+    "debug": false,
+    "delete": true
 }

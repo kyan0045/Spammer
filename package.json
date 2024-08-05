@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kyan0045/spammer.git"
+    "url": "git+https://github.com/XenDevs/spammer.git"
   },
   "keywords": [
     "spammer",
@@ -21,10 +21,10 @@
     "discord",
     "poketwo"
   ],
-  "author": "kyan0045",
+  "author": "XenDevs",
   "license": "SEE LICENSE IN ./LICENSE",
   "bugs": {
-    "url": "https://github.com/kyan0045/spammer/issues"
+    "url": "https://github.com/XenDevs/spammer/issues"
   },
-  "homepage": "https://github.com/kyan0045/spammer#readme"
+  "homepage": "https://github.com/XenDevs/spammer#readme"
 }
