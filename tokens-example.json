@@ -1,11 +1,10 @@
 [
-    {
-      "token": "TOKEN1",
-      "channelId": "CHANNEL1"
-    },
-    {
-      "token": "TOKEN2",
-      "channelId": "CHANNEL2"
-    }
-  ]
-  
+  {
+    "token": "TOKEN1",
+    "channelIds": ["CHANNEL1", "CHANNEL2", "CHANNEL3"]
+  },
+  {
+    "token": "TOKEN2",
+    "channelIds": ["CHANNEL1", "CHANNEL2", "CHANNEL3"]
+  }
+]

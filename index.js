@@ -24,7 +24,7 @@ if (!data || !Array.isArray(data)) {
 
 config.tokens = data.map(item => ({
   token: item.token.trim(),
-  channelId: item.channelId.trim()
+  channelIds: item.channelIds.map(channelId => channelId.trim())
 }));
 
 if (process.env.REPLIT_DB_URL && (!process.env.TOKENS || !process.env.CONFIG))
@@ -32,7 +32,7 @@ if (process.env.REPLIT_DB_URL && (!process.env.TOKENS || !process.env.CONFIG))
     `You are running on replit, please use its secret feature, to prevent your tokens and webhook from being stolen and misused.\nCreate a secret variable called "CONFIG" for your config, and a secret variable called "TOKENS" for your tokens.`
   );
 
-async function Login(token, channelId) {
+async function Login(token, channelIds) {
   if (!token) {
     console.log(
       chalk.redBright("You must specify a (valid) token.") +
@@ -40,18 +40,10 @@ async function Login(token, channelId) {
     );
   }
 
-  if (!channelId) {
+  if (!channelIds || !Array.isArray(channelIds) || channelIds.length === 0) {
     console.log(
       chalk.redBright(
-        "You must specify a (valid) channel ID for all your tokens. This is the channel in which they will spam."
-      )
-    );
-  }
-
-  if (channelId && channelId.length > 21) {
-    console.log(
-      chalk.redBright(
-        `You must specify a (valid) channel ID, ${channelId} is too long!`
+        "You must specify (valid) channel IDs for all your tokens. These are the channels in which they will spam."
       )
     );
   }
@@ -70,33 +62,46 @@ async function Login(token, channelId) {
     console.log(`Logged in to ` + chalk.red(client.user.tag) + `!`);
     client.user.setStatus("invisible");
 
-    const spamChannel = await client.channels.fetch(channelId);
-    if (!spamChannel) {
-      throw new Error(
-        `Couldn't find the channel specified for ${client.user.username}. Please check if the account has access to it.`
-      );
-    }
     const messages = fs
       .readFileSync("./data/messages.txt", "utf-8")
       .split("\n");
 
-    setInterval(async () => {
-      const message = messages[Math.floor(Math.random() * messages.length)];
-      const sentMessage = await spamChannel.send(message);
+    let currentChannelIndex = 0;
 
-      // Check if delete is set to true in config
-      if (config.delete) {
-        setTimeout(() => {
-          sentMessage.delete().catch(err => console.log(chalk.red("Failed to delete message:", err)));
-        }, 100); // Adjust the timeout if needed
+    async function spamMessages(channelId) {
+      const spamChannel = await client.channels.fetch(channelId);
+      if (!spamChannel) {
+        console.log(
+          `Couldn't find the channel specified for ${client.user.username}. Please check if the account has access to it.`
+        );
+        return;
       }
-    }, config.spamSpeed);
+
+      for (let i = 0; i < 10; i++) {
+        const message = messages[Math.floor(Math.random() * messages.length)];
+        const sentMessage = await spamChannel.send(message);
+
+        // Check if delete is set to true in config
+        if (config.delete) {
+          setTimeout(() => {
+            sentMessage.delete().catch(err => console.log(chalk.red("Failed to delete message:", err)));
+          }, parseInt(config.deleteSpeed, 10));
+        }
+
+        await new Promise(resolve => setTimeout(resolve, config.spamSpeed));
+      }
+
+      currentChannelIndex = (currentChannelIndex + 1) % channelIds.length;
+      spamMessages(channelIds[currentChannelIndex]);
+    }
+
+    spamMessages(channelIds[currentChannelIndex]);
   });
 }
 
 async function start() {
   for (var i = 0; i < config.tokens.length; i++) {
-    await Login(config.tokens[i].token, config.tokens[i].channelId);
+    await Login(config.tokens[i].token, config.tokens[i].channelIds);
   }
   if (log) {
     const embed = {
