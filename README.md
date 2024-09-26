@@ -14,7 +14,7 @@
 
 A compact and easy configurable Discord-spammer selfbot with multi-token support.</br>
 [![Support Server](https://img.shields.io/badge/Support_Server-000?style=for-the-badge&logo=&color=informational)](https://discord.gg/tXa2Hw5jHy)
-![Version](https://img.shields.io/badge/Version-1.1.0-000?style=for-the-badge&logo=&color=informational)
+![Version](https://img.shields.io/badge/Version-1.2.0-000?style=for-the-badge&logo=&color=informational)
 [![Stargazers](https://img.shields.io/github/stars/kyan0045/Spammer?style=for-the-badge&logo=&color=blue)](https://github.com/kyan0045/Spammer/stargazers)
 [![Forks](https://img.shields.io/github/forks/kyan0045/Spammer?style=for-the-badge&logo=&color=blue)](https://github.com/kyan0045/Spammer/network/members)
 [![Issues](https://img.shields.io/github/issues/kyan0045/Spammer?style=for-the-badge&logo=&color=informational)](https://github.com/kyan0045/Spammer/issues)
@@ -29,7 +29,7 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
 <h2 align="left">Features</h2>
 
 * [x] Supports Infinite Accounts </br>
-* [x] Spams Real Human Messages </br>
+* [x] Spams Real (Customizable) Human Messages </br>
 * [x] RAM efficient & fast spammer </br>
 
 <h2 align="left">Configurations</h2>
@@ -37,13 +37,17 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
 
 | Name  | Type | Default Value | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| ```logWebhook```  | ```String``` | ```undefined```  | Tells the program which webhook to log to. |
-| ```spamSpeed```  | ```Number``` | ```1500```  | Tells the program how many milliseconds to wait between messages |
+| ```LogWebhook```  | ```String``` | ```undefined```  | Tells the program which webhook to log to. |
+| ```SpamSpeed```  | ```Number``` | ```1500```  | Tells the program how many milliseconds to wait between messages |
+| ```Delete```  | ```Boolean``` | ```true```  | Tells the program whether or not to delete the messages |
+| ```DeleteSpeed```  | ```Number``` | ```1000```  | Tells the program how many milliseconds to wait before deleting messages |
 | ```debug```  | ```String``` | ```false```  | Tells the program whether or not you want errors/bugs to log in the console |
 
 
 
 ## Installation
+* Please note that you can change the spammed messages in [messages.txt](.data/messages.txt)
+
 <details><summary>Windows Setup</summary>
   1. Download NodeJS: https://nodejs.org/en/download</br>
   2. Download Git: https://git-scm.com/downloads</br>
@@ -61,7 +65,7 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
   ```bash
   npm i
   ```
-  - Now enter the correct values in [config.json](./config.json) & [tokens.txt](./tokens.txt).
+  - Now enter the correct values in [config.json](./config.json) & [tokens.json](./tokens.txt).
 
   To start the selfbot, run the following command in your shell/console:
   ```javascript
@@ -88,11 +92,19 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
 </details>
 
 ### Token Format
-```
-Token1 spamChannelId1
-Token2 spamChannelId2
+```json
+[
+  {
+    "token": "TOKEN1",
+    "channelIds": ["CHANNEL1", "CHANNEL2", "CHANNEL3"]
+  },
+  {
+    "token": "TOKEN2",
+    "channelIds": ["CHANNEL1", "CHANNEL2", "CHANNEL3"]
+  }
+]
 ``` 
-- Use a space to seperate the spamChannelId from the token.
+- You can use multiple channels per token, however this is not required nor recommended on high spamming speeds.
 
 
 ## Contributing

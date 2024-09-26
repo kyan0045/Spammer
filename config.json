@@ -1,5 +1,13 @@
 {
-    "logWebhook": "",
-    "spamSpeed": 1500,
-    "debug": false
+    "Logging": {
+        "LogWebhook": ""
+    },
+    "Spamming": {
+        "SpamSpeed": 1500
+    },
+    "Deleting": {
+        "Delete": true,
+        "DeleteSpeed": 1000
+    },
+    "Debug": false
 }
