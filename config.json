@@ -9,5 +9,5 @@
         "Delete": true,
         "DeleteSpeed": 1000
     },
-    "Debug": false
+    "debug": false
 }

@@ -1,36 +1,29 @@
-let version = "1.2.0";
+let version = "1.2.1";
 // Version counter
 
 // Importing required packages
 const { Client, WebhookClient } = require("discord.js-selfbot-v13");
 const fs = require("fs-extra");
 const chalk = require("chalk");
+const { tokens } = require("./tokens.js");
 
 // Deciding which config to use
 const config = process.env.CONFIG
   ? JSON.parse(process.env.CONFIG)
   : require("./config.json");
 let log;
-if (config?.logWebhook?.length > 25) {
+if (config?.Logging?.LogWebhook?.length > 25) {
   log = new WebhookClient({ url: config.Logging.LogWebhook });
 }
 
-// Getting & seperating the tokens
-let data;
-if (process.env.TOKENS) {
-  data = JSON.parse(process.env.TOKENS);
-} else {
-  data = fs.readJsonSync("./tokens.json"); 
-}
+config.tokens = tokens.map((item) => ({
+  token: item.token.trim(),
+  channelIds: item.channelIds.map((channelId) => channelId.trim()),
+}));
 
-if (!data || !Array.isArray(data)) {
+if (!tokens || !Array.isArray(tokens)) {
   throw new Error(`Unable to find valid tokens.`);
 }
-
-config.tokens = data.map(item => ({
-  token: item.token.trim(),
-  channelIds: item.channelIds.map(channelId => channelId.trim())
-}));
 
 // Replit .env check
 if (process.env.REPLIT_DB_URL && (!process.env.TOKENS || !process.env.CONFIG))
@@ -40,7 +33,6 @@ if (process.env.REPLIT_DB_URL && (!process.env.TOKENS || !process.env.CONFIG))
 
 // Main function which handles the actual spamming
 async function Login(token, channelIds) {
-
   // Checks to see if the values are valid
   if (!token) {
     console.log(
@@ -95,11 +87,17 @@ async function Login(token, channelIds) {
         // Check if delete is set to true in config
         if (config.Deleting.Delete) {
           setTimeout(() => {
-            sentMessage.delete().catch(err => console.log(chalk.red("Failed to delete message:", err)));
+            sentMessage
+              .delete()
+              .catch((err) =>
+                console.log(chalk.red("Failed to delete message:", err))
+              );
           }, parseInt(config.Deleting.DeleteSpeed, 10));
         }
 
-        await new Promise(resolve => setTimeout(resolve, config.Spamming.SpamSpeed));
+        await new Promise((resolve) =>
+          setTimeout(resolve, config.Spamming.SpamSpeed)
+        );
       }
 
       currentChannelIndex = (currentChannelIndex + 1) % channelIds.length;
@@ -112,6 +110,11 @@ async function Login(token, channelIds) {
 
 // Function that runs the main function with every available token
 async function start() {
+  console.log(
+    chalk.greenBright(`[${version}]`),
+    chalk.bold.white(`Spammer by`),
+    chalk.cyan(`@kyan0045`)
+  );
   for (var i = 0; i < config.tokens.length; i++) {
     await Login(config.tokens[i].token, config.tokens[i].channelIds);
   }
