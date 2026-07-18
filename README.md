@@ -14,7 +14,7 @@
 
 A compact and easy configurable Discord-spammer selfbot with multi-token support.</br>
 [![Support Server](https://img.shields.io/badge/Support_Server-000?style=for-the-badge&logo=&color=informational)](https://discord.gg/tXa2Hw5jHy)
-![Version](https://img.shields.io/badge/Version-1.2.0-000?style=for-the-badge&logo=&color=informational)
+![Version](https://img.shields.io/badge/Version-1.2.1-000?style=for-the-badge&logo=&color=informational)
 [![Stargazers](https://img.shields.io/github/stars/kyan0045/Spammer?style=for-the-badge&logo=&color=blue)](https://github.com/kyan0045/Spammer/stargazers)
 [![Forks](https://img.shields.io/github/forks/kyan0045/Spammer?style=for-the-badge&logo=&color=blue)](https://github.com/kyan0045/Spammer/network/members)
 [![Issues](https://img.shields.io/github/issues/kyan0045/Spammer?style=for-the-badge&logo=&color=informational)](https://github.com/kyan0045/Spammer/issues)
@@ -41,15 +41,14 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
 | ```SpamSpeed```  | ```Number``` | ```1500```  | Tells the program how many milliseconds to wait between messages |
 | ```Delete```  | ```Boolean``` | ```true```  | Tells the program whether or not to delete the messages |
 | ```DeleteSpeed```  | ```Number``` | ```1000```  | Tells the program how many milliseconds to wait before deleting messages |
-| ```debug```  | ```String``` | ```false```  | Tells the program whether or not you want errors/bugs to log in the console |
 
 
 
 ## Installation
-* Please note that you can change the spammed messages in [messages.txt](.data/messages.txt)
+* Please note that you can change the spammed messages in [messages.txt](./data/messages.txt)
 
 <details><summary>Windows Setup</summary>
-  1. Download NodeJS: https://nodejs.org/en/download</br>
+  1. Download Node.js 18.13 or newer: https://nodejs.org/en/download</br>
   2. Download Git: https://git-scm.com/downloads</br>
   3. Run the following commands in your shell/console:</br>
 
@@ -65,11 +64,11 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
   ```bash
   npm i
   ```
-  - Now enter the correct values in [config.json](./config.json) & [tokens.json](./tokens.txt).
+  - Now enter the correct values in [config.json](./config.json) and [tokens.js](./tokens.js).
 
   To start the selfbot, run the following command in your shell/console:
   ```javascript
-  node .
+  npm start
   ```
 </details>
 <details><summary>Replit Setup</summary>
@@ -79,12 +78,11 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
   ```bash
   npm i
   ```
-  - Now enter the correct values in [config.json](./config.json) & [tokens.txt](./tokens.txt).
-  Note: It's recommend to use secrets when you host on replit. TOKENS for the tokens.txt contentc, CONFIG for the config.json contents
+  - Now enter the correct values in [config.json](./config.json) and [tokens.js](./tokens.js).
   
   To start the selfbot, run the following command in your shell/console:
   ```javascript
-  node .
+  npm start
   ```
 </details>
 <details><summary>Termux (Phone) Setup</summary>
@@ -92,8 +90,8 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
 </details>
 
 ### Token Format
-```json
-[
+```javascript
+const tokens = [
   {
     "token": "TOKEN1",
     "channelIds": ["CHANNEL1", "CHANNEL2", "CHANNEL3"]
@@ -102,7 +100,9 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
     "token": "TOKEN2",
     "channelIds": ["CHANNEL1", "CHANNEL2", "CHANNEL3"]
   }
-]
+];
+
+module.exports = { tokens };
 ``` 
 - You can use multiple channels per token, however this is not required nor recommended on high spamming speeds.
 
@@ -111,4 +111,4 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
 Pull requests & suggestions are always welcome! For major changes, please open an issue/DM me on Discord first (@kyan0045) to discuss what you would like to change and to what extend.
 
 ## License
-[BSD](./LICENSE)
+See [LICENSE](./LICENSE).

@@ -8,6 +8,5 @@
     "Deleting": {
         "Delete": true,
         "DeleteSpeed": 1000
-    },
-    "debug": false
+    }
 }
