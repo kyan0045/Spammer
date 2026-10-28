@@ -1,14 +1,13 @@
 {
   "name": "spammer",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "A compact and easy configurable Discord-spammer selfbot with multi-token support.",
   "main": "index.js",
   "dependencies": {
-    "chalk": "^4.1.0",
-    "discord-self-lite": "^0.1.17"
+    "discord-self-lite": "^0.2.0"
   },
   "scripts": {
-    "start": "node --no-deprecation index.js"
+    "start": "node index.js"
   },
   "engines": {
     "node": ">=18.13.0"

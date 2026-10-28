@@ -1,11 +1,13 @@
+// Replace the placeholder token and channel IDs with your own values.
 const tokens = [
   {
-    token: "TOKEN1",
-    channelIds: ["CHANNEL1"], // MULTIPLE CHANNEL IDS CAN BE ADDED (OPTIONAL)
+    token: "YOUR_TOKEN_HERE",
+    channelIds: ["123456789012345678"], // Add more channel IDs if needed.
   },
+  // Optional: remove this entry if you only use one account.
   {
-    token: "TOKEN2",
-    channelIds: ["CHANNEL1"], // MULTIPLE CHANNEL IDS CAN BE ADDED (OPTIONAL)
+    token: "YOUR_SECOND_TOKEN_HERE",
+    channelIds: ["123456789012345678"],
   },
 ];
 

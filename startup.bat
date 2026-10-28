@@ -3,6 +3,6 @@
 
 call npm i
 
-call node --no-deprecation index.js
+call node index.js
 
 pause

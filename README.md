@@ -1,48 +1,37 @@
-<meta name="description" content="This AutoCatcher was designed to automatically catch Pokemon spawned on Discord by Poketwo bot. It also offers other utility functions to automate features to make you rich in Poketwo. Apart from autocatching, the bot extends its features to easy customization with easy setup."/>
-
-<meta name="keywords" content="Poketwo, Poketwo AutoCatcher, Poketwo Hack, poketwo selfbot, Poketwo vote, poketwo discord bot, poketwo bot, premium, poketwo commands, Safe autocatcher, catch pokemon, poketwo-hack, poketwo-autocatcher, youtube, poketwo free, poketwo paid, mass trade, github, mass-release, auto-vote, accurate,poketwo official server, poketwo auto catcher, poketwo helper bot, poketwo hack, poketwo rich, poketwo cheat, download,poketwo coins, poketwo shiny, online, how-to-get-rich-in-poketwo , kyan, Fuzzy, AI, Poketwo , latest, 2021, working, 2022"/>
-
-<meta name="author" content="kyan0045"/>
-<meta name="url" content="https://github.com/kyan0045/CatchTwo" />
-<meta name="og:title" content="Spammer; Discord-Spammer selfbot"/>
-<meta name="google-site-verification" content="premium best" />
-<meta name="og:url" content="https://github.com/kyan0045/Spammer" />
-<meta name="og:image" content="https://i.imgur.com/85PNo2N.png" />
-<meta name="og:description" content="A compact and easy configurable Discord-spammer selfbot with multi-token support."/>
-
 <h1>Spammer; Discord-spammer selfbot</h1>
 
 A compact and easy configurable Discord-spammer selfbot with multi-token support.</br>
 [![Support Server](https://img.shields.io/badge/Support_Server-000?style=for-the-badge&logo=&color=informational)](https://discord.gg/tXa2Hw5jHy)
-![Version](https://img.shields.io/badge/Version-1.2.1-000?style=for-the-badge&logo=&color=informational)
+![Version](https://img.shields.io/github/package-json/v/kyan0045/Spammer?style=for-the-badge&logo=&color=informational)
 [![Stargazers](https://img.shields.io/github/stars/kyan0045/Spammer?style=for-the-badge&logo=&color=blue)](https://github.com/kyan0045/Spammer/stargazers)
 [![Forks](https://img.shields.io/github/forks/kyan0045/Spammer?style=for-the-badge&logo=&color=blue)](https://github.com/kyan0045/Spammer/network/members)
 [![Issues](https://img.shields.io/github/issues/kyan0045/Spammer?style=for-the-badge&logo=&color=informational)](https://github.com/kyan0045/Spammer/issues)
 [![Pull Requests](https://img.shields.io/github/issues-pr/kyan0045/Spammer?style=for-the-badge&logo=&color=informational)](https://github.com/kyan0045/Spammer/pulls)
-<a href="https://replit.com/new/github/kyan0045/Spammer"><img src="https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg" alt="Deploy on replit" /></a>
-
-
 
 <h2>About</h2>
 A compact and easy configurable Discord-spammer selfbot with multi-token support.
 
+> [!WARNING]
+> This project uses user tokens (selfbotting), which violates [Discord's Terms of Service](https://discord.com/terms). Any account you log in can be permanently terminated. Do not use your main account. The authors are not responsible for account bans or other consequences of using this project.
+
 <h2 align="left">Features</h2>
 
-* [x] Supports Infinite Accounts </br>
-* [x] Spams Real (Customizable) Human Messages </br>
-* [x] RAM efficient & fast spammer </br>
+* [x] Supports multiple accounts </br>
+* [x] Spams randomized custom messages from [messages.txt](./data/messages.txt) </br>
+* [x] Optionally deletes messages after a configurable delay </br>
+* [x] Backs off when Discord rate limits a channel </br>
 
 <h2 align="left">Configurations</h2>
 
 
 | Name  | Type | Default Value | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| ```LogWebhook```  | ```String``` | ```undefined```  | Tells the program which webhook to log to. |
-| ```SpamSpeed```  | ```Number``` | ```1500```  | Tells the program how many milliseconds to wait between messages |
-| ```Delete```  | ```Boolean``` | ```true```  | Tells the program whether or not to delete the messages |
-| ```DeleteSpeed```  | ```Number``` | ```1000```  | Tells the program how many milliseconds to wait before deleting messages |
+| ```LogWebhook```  | ```String``` | ```undefined```  | Webhook URL used to send a startup log. Leave empty to disable. |
+| ```SpamSpeed```  | ```Number``` | ```1500```  | Milliseconds to wait between messages. Minimum 1000 when deleting, 500 otherwise. Maximum 3600000. |
+| ```Delete```  | ```Boolean``` | ```true```  | Whether to delete sent messages. |
+| ```DeleteSpeed```  | ```Number``` | ```1000```  | Milliseconds to wait before deleting a message. Maximum 600000. |
 
-
+You can provide the config as a JSON string in the `CONFIG` environment variable instead of editing [config.json](./config.json).
 
 ## Installation
 * Please note that you can change the spammed messages in [messages.txt](./data/messages.txt)
@@ -71,40 +60,51 @@ A compact and easy configurable Discord-spammer selfbot with multi-token support
   npm start
   ```
 </details>
-<details><summary>Replit Setup</summary>
-  <a href="https://replit.com/new/github/kyan0045/Spammer"><img src="https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg" alt="Deploy on replit" /></a></br>
-  1. Run the following commands in your shell/console:</br>
-  
+<details><summary>Termux (Phone) Setup</summary>
+  1. Install Termux from F-Droid: https://f-droid.org/packages/com.termux/</br>
+  2. Run the following commands in Termux:</br>
+
   ```bash
-  npm i
+  pkg update && pkg upgrade -y
+  pkg install -y nodejs git nano
+  git clone https://github.com/kyan0045/spammer.git
+  cd spammer
+  npm install
   ```
-  - Now enter the correct values in [config.json](./config.json) and [tokens.js](./tokens.js).
-  
-  To start the selfbot, run the following command in your shell/console:
-  ```javascript
+
+  3. Enter the correct values in [config.json](./config.json) and [tokens.js](./tokens.js):</br>
+
+  ```bash
+  nano config.json
+  nano tokens.js
+  ```
+
+  4. Start the selfbot and stop Android from sleeping the process:</br>
+
+  ```bash
+  termux-wake-lock
   npm start
   ```
-</details>
-<details><summary>Termux (Phone) Setup</summary>
-  - Will be added later, please head to our Discord server for support.
 </details>
 
 ### Token Format
 ```javascript
 const tokens = [
   {
-    "token": "TOKEN1",
-    "channelIds": ["CHANNEL1", "CHANNEL2", "CHANNEL3"]
+    token: "YOUR_TOKEN_HERE",
+    channelIds: ["123456789012345678"],
   },
   {
-    "token": "TOKEN2",
-    "channelIds": ["CHANNEL1", "CHANNEL2", "CHANNEL3"]
-  }
+    token: "YOUR_SECOND_TOKEN_HERE",
+    channelIds: ["123456789012345678", "987654321098765432"],
+  },
 ];
 
 module.exports = { tokens };
 ``` 
-- You can use multiple channels per token, however this is not required nor recommended on high spamming speeds.
+- Replace every placeholder with a real user token and numeric channel IDs. Channel IDs are the 17-20 digit numbers copied from Discord.
+- Using multiple tokens is optional. The example shows two entries; remove the second if you only need one account, or add more entries if you need more.
+- Each token can have one or more channel IDs. Multiple channels are supported, but high spam speeds are safer with one channel per token.
 
 
 ## Contributing
